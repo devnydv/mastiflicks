@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{res[0]["title"]}}</title>
+</head>
+<body>
+    <h1>Only for the learning purpose</h1>
+    <a href="/lol/50">click here</a>
+    {% for item in res %}
+    <p>{{item.title}}</p>
+    <p>{{item.cat}}</p>
+    <p>{{item.desc}}</p>
+    {% endfor %}
+    {{name}}
+    
+</body>
+</html>
