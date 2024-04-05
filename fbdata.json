@@ -1,0 +1,62 @@
+{
+    "lol": {
+        "data": [
+            {
+                "cat": [
+                    "Trailer"
+                ],
+                "desc": "The trailer for the movie Shaitan is out. It seems quite amazing. Staring Ajay Devng, Madhavan, and Janki Bodiwala. The trailer ends up telling about the plot of the movie. It is enough to guess the story that the movie is trying to convey. On the other hand, the audience was waiting for such a movie from Ajay Devgn after Drishyam. Shaitan is a remake, but very few people are aware of the real movie, the 2023 Gujarati horror film Vash, so the Hindi audience may like the movie.",
+                "id": "0",
+                "img": "https://res.cloudinary.com/dqmlkqhwx/image/upload/c_scale,h_240,w_460/f_auto,q_auto/images/pz44zrzve5udhe4yqfqo",
+                "pubDate": "Friday, 26 Mar, 2024",
+                "title": "Shaitan Trailer: A Gripping Look at Intense Thriller with Ajay Devgn",
+                "url": {
+                    "title": "Watch Trailer on YouTube",
+                    "url": "https://www.youtube.com/watch?v=upDhKSx7P7E"
+                }
+            },
+            {
+                "cat": [
+                    "Movie"
+                ],
+                "desc": "Article 370, directed by Aditya Suhas, has 8.8 out of 10 IMBD ratings. Reviews are also showing positive indications toward the movie. The movie was released before the elections and may be considered propaganda, but people are loving the performance of Yami Gautam as a lead actor in this movie.",
+                "id": "1",
+                "img": "https://res.cloudinary.com/dqmlkqhwx/image/upload/c_scale,h_240,w_460/f_auto,q_auto/images/u9skxqrnlsh47d7bdfvv",
+                "pubDate": "Thursday, 26 Feb, 2024",
+                "title": "Is Article 370 worth watching? Let's find out",
+                "url": {
+                    "title": "IMDB Ratings",
+                    "url": "https://www.imdb.com/title/tt30970235/"
+                }
+            },
+            {
+                "cat": [
+                    "Movie"
+                ],
+                "desc": "The Crakk movie is running in cinemas. The actors have not performed that well in this movie except Arjun Rampal, who seems good in his character. Work by Nora Fatehi is quite casual. Most people relate the movie to battle royale games, and the story is also lagging behind in conveying the message. The positive part of this movie was the action scenes, which were quite good and the only positive side of the movie. Overall, the movie can be regarded as an average one.",
+                "id": "2",
+                "img": "https://res.cloudinary.com/dqmlkqhwx/image/upload/c_scale,h_240,w_460/f_auto,q_auto/images/reklmdf7jgf52io650vu",
+                "pubDate": "Thursday, 27 Feb, 2024",
+                "title": "Lets talk about the movie Crakk",
+                "url": {
+                    "title": "Watch Crakk Trailer on YouTube",
+                    "url": "https://youtu.be/8xjSvwi7W-0?si=bkDQJudU8ero95Gs"
+                }
+            },
+            {
+                "cat": [
+                    "Trailer"
+                ],
+                "desc": "Vikrant Massey, who came into the news recently because of his movie 12th Fail, has announced a new movie with a small video on his Instagram account. Titled \u2018The Sabarmati Report\u2019, the film will be about the unfortunate burning of the Sabarmati Express in Gujarat\u2019s Godhra exactly 22 years ago, on February 22, 2002.",
+                "id": "3",
+                "img": "https://res.cloudinary.com/dqmlkqhwx/image/upload/c_scale,h_240,w_460/f_auto,q_auto/images/xazxcvbs1dnffdnocspw",
+                "pubDate": "Thursday, 28 Feb, 2024",
+                "title": "Vikrant Massey announces a film called \u2018The Sabarmati Report\u2019",
+                "url": {
+                    "title": "Watch the Video",
+                    "url": "https://www.instagram.com/p/C32g9RuoEHn/"
+                }
+            }
+        ]
+    }
+}
