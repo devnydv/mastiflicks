@@ -18,5 +18,5 @@ def lol(marks):
     return render_template("lol.html",mark = marks)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+#if __name__ == "__main__":
+    #app.run(debug=True)
