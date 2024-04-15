@@ -17,7 +17,7 @@ def filehandle():
     if os.path.exists(file_path):
         file_creation_time = os.path.getctime(file_path)
         current_time = time.time()
-        if current_time - file_creation_time <= 6:  # 600 seconds = 10 minutes
+        if current_time - file_creation_time <= 600 * 6:  # 600 seconds = 10 minutes
             f = open("fbdata.json", "r")
             
             return f.read()
