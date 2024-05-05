@@ -32,6 +32,9 @@ def read():
     #id = int(id)
     post = [item for item in reverseddata if item["id"] == id]
     return render_template("read.html", ids = id, dbdata= post)
-
+@app.route("/newdb")
+def newdb():
+    return render_template("newdb.html")
+    
 #if __name__ == "__main__":
    #app.run(debug=True)
