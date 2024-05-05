@@ -33,5 +33,5 @@ def read():
     post = [item for item in reverseddata if item["id"] == id]
     return render_template("read.html", ids = id, dbdata= post)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+#if __name__ == "__main__":
+   #app.run(debug=True)
