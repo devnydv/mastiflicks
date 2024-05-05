@@ -3,6 +3,9 @@
 {% block seo %}
 <title>{{title}}</title>
 <meta name="description" content="{{dbdata[0]['desc'][:200]}}">
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{dbdata[0]['desc'][:200]}}" />
+<meta property="og:image" content="{{dbdata[0]['img']}}" />
 {% endblock %}
 
 {% block content %}
