@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={{url_for('static', filename='style.css' )}}>
+    <link rel="shortcut icon" href={{url_for('static', filename='ico/icon.webp' )}} type="image/x-icon">
+    {% block seo %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+    <nav id="hemu">
+        <div id="logo">
+            <img id="mnicon" onclick="notvisi()" src="{{url_for('static', filename='ico/menu_black_24dp.svg')}}"
+                alt="menu">
+            <a href="/" title="MastiFlick">
+                <p>MastiFlick</p>
+            </a>
+        </div>
+        <div id="menug">
+            <ul id="ul" class="notvisi">
+                <li>
+                    <a href="/" onclick="setama()" title="home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/?category=Trailer" title="Trailer">
+                        Trailer
+                    </a>
+                </li>
+                <li>
+                    <a href="/?category=Movie" title="Movie">
+                        Movie
+                    </a>
+                </li>
+                <li>
+                    <a href="/?category=Song" title="Song">
+                        Song
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+</body>
+<script>
+
+</script>
+
+</html>

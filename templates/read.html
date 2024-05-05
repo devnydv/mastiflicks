@@ -1,0 +1,22 @@
+{% set title = dbdata[0]["title"] %}
+{%extends"base.html" %}
+{% block seo %}
+<title>{{title}}</title>
+<meta name="description" content="{{dbdata[0]['desc'][:200]}}">
+{% endblock %}
+
+{% block content %}
+
+    <div id='pagenews'>
+        <div id='newsdiv'>       
+                <h1 class='head'>{{dbdata[0]["title"]}}</h2>
+                <img src='{{dbdata[0]["img"]}}' loading='lazy' alt='$title'>
+                <p class='para'>{{dbdata[0]["pubDate"]}}</p>
+                <p class='para'>{{dbdata[0]["desc"]}}</p>
+            <a href='{{dbdata[0]["url"]["url"]}}' title='{{dbdata["cat"]}}' target="_blank">
+                <button class="catbut">{{dbdata[0]["url"]["title"]}}</button>
+            </a>
+        </div>   
+
+</div> 
+{% endblock %}
