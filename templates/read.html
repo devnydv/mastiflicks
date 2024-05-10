@@ -6,6 +6,29 @@
 <meta property="og:title" content="{{title}}" />
 <meta property="og:description" content="{{dbdata[0]['desc'][:200]}}" />
 <meta property="og:image" content="{{dbdata[0]['img']}}" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    
+  },
+  "headline": "{{title}} ",
+  "description": "{{dbdata[0]['desc'][:200]}}",
+  "image": "{{dbdata[0]["img"]}}",
+  "author": {
+    "@type": "Person",
+    "name": "Mastiflicks"
+  
+  },
+  "datePublished": "{{ article_date_published }}"
+  
+}
+</script>
+
+
 {% endblock %}
 
 {% block content %}
