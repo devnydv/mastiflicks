@@ -35,6 +35,9 @@ def read():
 @app.route("/newdb")
 def newdb():
     return render_template("newdb.html")
-    
+
+@app.route("/ads.txt")
+def newdb():
+    return render_template("ads.txt")
 #if __name__ == "__main__":
    #app.run(debug=True)
