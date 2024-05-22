@@ -1,14 +1,5 @@
-{% macro replacedtitle(text) %}
-{% set result = text.replace("!", "") %}
-{% set result = result.replace(":", "") %}
-{% set result = result.replace("?", "") %}
-{% set result = result.replace(".", "") %}
-{% set result = result.replace("'", "") %}
-{% set result = result.replace(",", "") %}
-{% set result = result.replace(";", "") %}
-{% set result = result.replace(" ", "-") %}
-{{result}}
 
+{% from "title_macro.html" import replacedtitle %}
 {% endmacro %}
 {% macro card() -%}
 <div id='news'>
