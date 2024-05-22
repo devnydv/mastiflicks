@@ -30,8 +30,19 @@ def read():
     id = request.args.get("id")
     #print(data)
     #id = int(id)
+    otherpost = []
+    if int(id) > 9:
+        newid = int(id) 
+        lowid= newid -9
+        for x in range(lowid, newid):
+            otherpost.append([item for item in reverseddata if item["id"] == str(x)])
+        
+    else:
+        otherpost = []
+
+    # post contains a single post that is the main post
     post = [item for item in reverseddata if item["id"] == id]
-    return render_template("read.html", ids = id, dbdata= post)
+    return render_template("read.html", ids = id, dbdata= post, alldata= otherpost)
 @app.route("/newdb")
 def newdb():
     return render_template("newdb.html")
