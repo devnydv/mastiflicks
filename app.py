@@ -37,7 +37,7 @@ def newdb():
     return render_template("newdb.html")
 
 @app.route("/ads.txt")
-def newdb():
-    return render_template("ads.txt")
+def ads():
+    return send_from_directory(directory='.', path='ads.txt')
 #if __name__ == "__main__":
    #app.run(debug=True)
