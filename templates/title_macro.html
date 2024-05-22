@@ -1,0 +1,11 @@
+{% macro replacedtitle(text) %}
+{% set result = text.replace("!", "") %}
+{% set result = result.replace(":", "") %}
+{% set result = result.replace("?", "") %}
+{% set result = result.replace(".", "") %}
+{% set result = result.replace("'", "") %}
+{% set result = result.replace(",", "") %}
+{% set result = result.replace(";", "") %}
+{% set result = result.replace(" ", "-") %}
+{{result}}
+{% endmacro %}
