@@ -44,5 +44,36 @@
             </a>
         </div>   
 
-</div> 
+    </div>
+
+{% from "title_macro.html" import replacedtitle %}
+<p class="head" style="font-size:x-large; font-weight: bolder; text-align:center; margin: 5px 4px;"> Reade More</p>
+{%if alldata ==[]%}
+<a href='/' title='read more' style="font-size:large; font-weight: bolder; text-align:center; margin: 5px 5px;">
+    <p class='catbut'>Click Here to Read More...</p>
+</a>
+{%else%}
+<div id='news'>
+    
+    {%for item in alldata |reverse%}
+    {% set title = replacedtitle(item[0]["title"])|lower %}
+    
+    <div class='kid1'>
+        
+        <a href="read?id={{item[0]['id']}}&title={{title}}" title='{{item[0]["title"]}}'>
+            <div>
+                <h2 class='head'>{{item[0]["title"]}}</h2>
+                <img src='{{item[0]["img"]}}' loading='lazy' alt={{title}}>
+                <p class='para'>{{item[0]["pubDate"]}}</p>
+                <p class='para'>{{item[0]["desc"]}}</p>
+            </div>
+        </a>
+        <a href='/?category={{item[0]["cat"]}}' title='{{item[0]["cat"]}}'>
+            <p class='catbut'>{{item[0]["cat"]}}</p>
+        </a>
+    </div>
+    {%endfor%}
+    
+</div>
+{%endif%}
 {% endblock %}
