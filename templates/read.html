@@ -1,4 +1,6 @@
 {% set title = dbdata[0]["title"] %}
+{% from "title_macro.html" import replacedtitle %}
+{% set seotitle = replacedtitle(title)| lower%}
 {%extends"base.html" %}
 {% block seo %}
 <title>{{title}}</title>
@@ -23,8 +25,8 @@
     "name": "Mastiflicks"
   
   },
-  "datePublished": "{{dbdata[0]["pubDate"]}}"
-  
+  "datePublished": "{{dbdata[0]["pubDate"]}}",
+  "url": "https://mastiflicks.vercel.app/read?id={{ids| int}}&title={{ seotitle }}" 
 }
 </script>
 
@@ -46,7 +48,7 @@
 
     </div>
 
-{% from "title_macro.html" import replacedtitle %}
+
 <p class="head" style="font-size:x-large; font-weight: bolder; text-align:center; margin: 5px 4px;"> Reade More</p>
 {%if alldata ==[]%}
 <a href='/' title='read more' style="font-size:large; font-weight: bolder; text-align:center; margin: 5px 5px;">
