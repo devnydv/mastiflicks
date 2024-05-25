@@ -50,5 +50,5 @@ def newdb():
 @app.route("/ads.txt")
 def ads():
     return send_from_directory(directory='.', path='ads.txt')
-if __name__ == "__main__":
-   app.run(debug=True)
+#if __name__ == "__main__":
+   #app.run(debug=True)
