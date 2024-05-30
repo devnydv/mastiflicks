@@ -1,10 +1,10 @@
-
 {% from "title_macro.html" import replacedtitle %}
+
 
 {% macro card() -%}
 <div id='news'>
-    {% for item  in dbdata %}
-    
+    {% for item in dbdata %}
+
     {% set title = item["title"]| lower %}
 
 
@@ -12,7 +12,7 @@
         <a href="read?id={{item['id']}}&title={{replacedtitle(title)}}" title='{{replacedtitle(title)}}'>
             <div>
                 <h2 class='head'>{{item["title"]}}</h2>
-                <img src='{{item["img"]}}' loading='lazy' alt='$title'>
+                <img src='{{item["img"]}}' loading='lazy' alt='{{title}}'>
                 <p class='para'>{{item["pubDate"]}}</p>
                 <p class='para'>{{item["desc"]}}</p>
             </div>
@@ -21,17 +21,18 @@
             <p class='catbut'>{{item["cat"]}}</p>
         </a>
     </div>
-    
+
     {% endfor%}
 </div>
 
 {%- endmacro %}
 
 
-{% extends "base.html" %}
+{%extends"base.html" %}
 {% block seo %}
-    <title>One Hub for Your Entertainment Masala | MastiFlick</title>
-    <meta name="description" content="Get your daily dose of laughter & entertainment! Reviews, news, recommendations & more in bite-sized articles. Ditch the endless search, visit mastiflicks for flicks of Masti!">
+<title>One Hub for Your Entertainment Masala | MastiFlick</title>
+<meta name="description"
+    content="Get your daily dose of laughter & entertainment! Reviews, news, recommendations & more in bite-sized articles. Ditch the endless search, visit mastiflicks for flicks of Masti!">
 {% endblock %}
 {% block content %}
 
@@ -40,6 +41,15 @@
 
 <h1 id='snews'>All tranding MastiFlick over Globe </h1>
 {{card()}}
+<div id="page">
+    {%for x in range(pages )%}
+
+    <a href="/?page={{x}}">
+        <p>Page: {{x}}</p>
+    </a>
+
+    {%endfor%}
+</div>
 {% else %}
 <h1 id='snews'>Buzz and flicks from {{cate}} Section</h1>
 {{card()}}
