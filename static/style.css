@@ -367,6 +367,20 @@ body{
   
 }
 
+#page{
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  justify-content: center;
+}
+
+#page a {
+  text-decoration: none;
+  color: black;
+  margin: 5px 5px;
+  padding: 3px 3px;
+  background-color: #e3e5f3;
+}
 
 
 
