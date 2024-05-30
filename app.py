@@ -1,7 +1,8 @@
 import json
-from flask import Flask, render_template, request, send_from_directory
+import math
+from flask import Flask, render_template, request
 from api import filehandle
-import requests
+
 
 app = Flask(__name__)
 data =json.loads( filehandle())
@@ -9,18 +10,25 @@ data =json.loads( filehandle())
 data = data["data"]
 reverseddata = data
 reverseddata.reverse()
+postlen = len(reverseddata)
+
 #@app.route("/")
 #def index():
     #return render_template("index.html" ,dbdata= data)
 
 @app.route("/")
 def fil():
-    
+    page = request.args.get("page", 0 ,type=int)
+    page = page +1
+    start = 30*page - 30
+    end = 30*page
+    tota_page = postlen  / 30
+    tota_page = math.ceil(tota_page)
+    print(tota_page)
     cate = request.args.get("category")
-    if cate == None:       
-        return render_template("index.html" ,dbdata = reverseddata, cate = cate)
+    if cate == None:
+        return render_template("index.html",dbdata = reverseddata[start: end], cate = cate, pages= tota_page)
     else:
-        
         movies = [item for item in data if item["cat"] == cate]
         return render_template("index.html" , cate = cate, dbdata = movies )
 
@@ -30,6 +38,7 @@ def read():
     id = request.args.get("id")
     #print(data)
     #id = int(id)
+# send 9 items for the recomandation section of read route
     otherpost = []
     if int(id) > 9:
         newid = int(id) 
@@ -43,12 +52,10 @@ def read():
     # post contains a single post that is the main post
     post = [item for item in reverseddata if item["id"] == id]
     return render_template("read.html", ids = id, dbdata= post, alldata= otherpost)
+
 @app.route("/newdb")
 def newdb():
     return render_template("newdb.html")
 
-@app.route("/ads.txt")
-def ads():
-    return send_from_directory(directory='.', path='ads.txt')
-#if __name__ == "__main__":
-   #app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
