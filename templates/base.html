@@ -85,5 +85,63 @@
         console.log("manu")
     }
 </script>
+<script>
+    function crt(){
+            let newsDiv = document.getElementById("news")
+            let adDiv = document.createElement("div")
+            adDiv.setAttribute("id", "ad")
+            adDiv.setAttribute("class", "kid1")
+            newsDiv.insertAdjacentElement("afterbegin", adDiv)
+            
+    }
+    
+    function iterateWithRestart(arr, func, delay) {
+       
+        let i = 0;
+        const intervalId = setInterval(() => {
+            
+            func(arr[i]);
+            i++;
+            if (i === arr.length) {
+                i = 0;
+            }
+        }, delay);
+    }
 
+    // Example usage
+    //const myArray = ['a', 'b', 'c'];
+    function processElement(element) {
+        let adurl = document.getElementById("ad")
+           adurl.innerHTML= `
+            <a href="${element.url}" title='${element.title}' id="adurl">
+                <div>
+                    <h2 class='head' id="adtitle">${element.title}</h2>
+                    <img src='${element.img}' loading='lazy' alt=''>
+                    <p class='para'>Ad</p>
+                    
+                    <p class='para'>${element.desc}</p>
+                </div>
+            </a>
+
+        `
+    }
+
+
+    (async () => {
+        try {
+            let res = await fetch("https://filmyapp-e1005.firebaseio.com/mastiflix/adv.json")
+            let addata = await res.json()
+            setTimeout(crt, 2500);
+            iterateWithRestart(addata, processElement, 3000);
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error fetching da:', error);
+            //let adelement = document.getElementById("ad")
+            //adelement.parentNode.removeChild(adelement);
+        }
+    })();
+
+</script>
 </html>
