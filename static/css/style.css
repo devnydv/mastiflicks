@@ -422,7 +422,48 @@ h1{
   }
   
 } 
+/* code for footer */
 
+footer{
+  display: flex;
+  background-color: #e3e5f3;
+  
+}
+
+.footerKid{
+  width: 24%;
+  text-align: center;
+  padding:20px 20px ;
+  
+}
+
+.footerKid p{
+  text-align: justify;
+  font-size: 16px;
+}
+
+.footerKid a{
+  text-decoration: none;
+  display: block;
+  padding: 2px;
+  margin: 5px;
+  color: black;
+}
+ 
+@media(max-width: 700px){
+  footer{
+  flex-wrap: wrap;
+ 
+  justify-content: center;
+  }
+  .footerKid{
+    padding: 20px 4px;
+    margin: 2px 4px;
+    width: 46%;
+    
+  }
+
+}
 
 
 
