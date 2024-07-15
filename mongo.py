@@ -3,7 +3,9 @@ from pymongo.mongo_client import MongoClient
 
 
 #database config
-url = "mongodb+srv://bittumail:12356789@cluster0.fqrswkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+api = os.environ.get('API_URL')
+#url = "mongodb+srv://bittumail:12356789@cluster0.fqrswkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+url = api
 client = MongoClient(url)
 db = client.mastiflicks
 collection = db.data
