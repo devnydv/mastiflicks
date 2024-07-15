@@ -5,7 +5,7 @@ import os
 #database config
 api = os.environ.get("mongo")
 #api = os.getenv('mongo")
-#url = "mongodb+srv://bittumail:12356789@cluster0.fqrswkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
 url = api
 client = MongoClient(url)
 db = client.mastiflicks
