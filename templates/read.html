@@ -1,33 +1,33 @@
-{% set title = dbdata[0]["title"] %}
+{% set title = dbdata["title"] %}
 {% from "title_macro.html" import replacedtitle %}
 {% set seotitle = replacedtitle(title)| lower%}
 {%extends"base.html" %}
 {% block seo %}
 <title>{{title}}</title>
-<meta name="description" content="{{dbdata[0]['desc'][:150]}} ...">
+<meta name="description" content="{{dbdata['desc'][:200]}}">
 <meta property="og:title" content="{{title}}" />
-<meta property="og:description" content="{{dbdata[0]['desc'][:180]}} ..." />
-<meta property="og:image" content="{{dbdata[0]['img']}}" />
-<meta itemprop="image" content="{{dbdata[0]['img']}}">
+<meta property="og:description" content="{{dbdata['desc'][:200]}}" />
+<meta property="og:image" content="{{dbdata['img']}}" />
+
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage"
-    
-  },
-  "headline": "{{title}} ",
-  "description": "{{dbdata[0]['desc'][:200]}}",
-  "image": "{{dbdata[0]["img"]}}",
-  "author": {
-    "@type": "Person",
-    "name": "Mastiflicks"
-  
-  },
-  "datePublished": "{{dbdata[0]["pubDate"]}}",
-  "url": "https://mastiflicks.site/read?id={{ids| int}}&title={{ seotitle }}" 
-}
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage"
+        
+      },
+      "headline": "{{title}} ",
+      "description": "{{dbdata['desc'][:200]}}",
+      "image": "{{dbdata["img"]}}",
+      "author": {
+        "@type": "Website",
+        "name": "Mastiflicks"
+      },
+      "datePublished": "{{dbdata["pubDate"]}}",
+      "url": "https://mastiflicks.site/read?id={{ids| int}}&title={{ seotitle }}"
+
+    }
 </script>
 <script type="application/ld+json">
     {
@@ -41,61 +41,66 @@
       },{
         "@type": "ListItem",
         "position": 2,
-        "name": "{{dbdata[0]["cat"]}}",
-        "item": "https://mastiflicks.site/?category={{dbdata[0]["cat"]}}"
+        "name": "{{dbdata["cat"]}}",
+        "item": "https://mastiflicks.site/?category={{dbdata["cat"]}}"
       },{
         "@type": "ListItem",
         "position": 3,
-        "name": "{{dbdata[0]["title"]}}"
+        "name": "{{dbdata["title"]}}"
       }]
     }
-  </script>
+    </script>   
 
 {% endblock %}
 
+
 {% block content %}
 
-    <div id='pagenews'>
-        <div id='newsdiv'>       
-                <h1 class='head'>{{dbdata[0]["title"]}}</h1>
-                <img src='{{dbdata[0]["img"]}}' loading='lazy' alt={{title}}>
-                <p class='para'>{{dbdata[0]["pubDate"]}}</p>
-                <p class='para'>{{dbdata[0]["desc"]}}</p>
-            <a href='{{dbdata[0]["url"]["url"]}}' title='{{dbdata[0]["cat"]}}' target="_blank">
-                <button class="catbut">{{dbdata[0]["url"]["title"]}}</button>
-            </a>
-        </div>   
 
+<div id='pagenews'>
+    <div id='newsdiv'>
+        <h1 class='head'>{{dbdata["title"]}}</h1>
+            <img src='{{dbdata["img"]}}' loading='lazy' alt='{{title}}'>
+                <p class='para'>{{dbdata["pubDate"]}}</p>
+                <p class='para'>{{dbdata["desc"]}}</p>
+            <a href='{{dbdata["url"]["url"]}}' title='{{dbdata["cat"]}}' target="_blank">
+                <button class="catbut">{{dbdata["url"]["title"]}}</button>
+            </a>
     </div>
+</div>
 
 
 <p class="head" style="font-size:x-large; font-weight: bolder; text-align:center; margin: 5px 4px;"> Reade More</p>
-{%if alldata ==[]%}
+{%if alldata ==[] -%}
 <a href='/' title='read more' style="font-size:large; font-weight: bolder; text-align:center; margin: 5px 5px;">
     <p class='catbut'>Click Here to Read More...</p>
 </a>
 {%else%}
 <div id='news'>
+  
     
-    {%for item in alldata |reverse%}
-    {% set title = replacedtitle(item[0]["title"])|lower %}
+
+    
+    {% for item in alldata[0]  %}
+    {% set alltitle = replacedtitle(item["title"])|lower %}
     
     <div class='kid1'>
         
-        <a href="read?id={{item[0]['id']}}&title={{title}}" title='{{item[0]["title"]}}'>
+        <a href="read?id={{item['id']}}&title={{alltitle}}" title='{{item["title"]}}'>
             <div>
-                <h2 class='head'>{{item[0]["title"]}}</h2>
-                <img src='{{item[0]["img"]}}' loading='lazy' alt={{title}}>
-                <p class='para'>{{item[0]["pubDate"]}}</p>
-                <p class='para'>{{item[0]["desc"]}}</p>
+                <h2 class='head'>{{item["title"]}}</h2>
+                <img src='{{item["img"]}}' loading='lazy' alt={{title}}>
+                <p class='para'>{{item["pubDate"]}}</p>
+                <p class='para'>{{item["desc"]}}</p>
             </div>
         </a>
-        <a href='/?category={{item[0]["cat"]}}' title='{{item[0]["cat"]}}'>
-            <p class='catbut'>{{item[0]["cat"]}}</p>
+        <a href='/?category={{item["cat"]}}' title='{{item["cat"]}}'>
+            <p class='catbut'>{{item["cat"]}}</p>
         </a>
     </div>
-    {%endfor%}
+    {%endfor %}
+    
     
 </div>
-{%endif%}
+{%- endif%}
 {% endblock %}
