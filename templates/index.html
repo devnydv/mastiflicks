@@ -1,7 +1,7 @@
 {% from "title_macro.html" import replacedtitle %}
 
 
-{% macro card() -%}
+{% macro card(cat) -%}
 <div id='news'>
     {% for item in dbdata %}
 
@@ -9,15 +9,17 @@
 
 
     <div class='kid1'>
-        <a href="read?id={{item['id']}}&title={{replacedtitle(title)}}" title='{{replacedtitle(title)}}'>
+        <a href="/read?id={{item['id']}}&title={{replacedtitle(title)}}" title='{{replacedtitle(title)}}'>
             <div>
                 <h2 class='head'>{{item["title"]}}</h2>
-                <img src='{{item["img"]}}' loading='lazy' alt='{{title}}'>
-                <p class='para'>{{item["pubDate"]}}</p>
+                <div class="imgdiv">
+                    <img src='{{item["img"]}}' loading='lazy' alt='{{title}}'>
+                </div>
+                <p class='para'>{{item["date"]}}</p>
                 <p class='para'>{{item["desc"]}}</p>
             </div>
         </a>
-        <a href='/?category={{item["cat"]}}' title='{{item["cat"]}}'>
+         <a href='/?category={{item["cat"]}}' title='{{item["cat"]}}'>
             <p class='catbut'>{{item["cat"]}}</p>
         </a>
     </div>
@@ -40,21 +42,50 @@
 
 
 <h1 id='snews'>All tranding MastiFlick over Globe </h1>
-{{card()}}
+{{card("all")}}
 <div id="page">
-    {%for x in range(pages )%}
-
-    <a href="/?page={{x}}">
-        <p>Page: {{x}} </p>
-    </a>
-
-    {%endfor%}
+    <button style="padding: 10px; background-color:rgb(224, 186, 186); margin:10px;" id="loadbut" onclick="loadmore()"><p>Load more...</p></button>
 </div>
 {% else %}
-<h1 id='snews'>Buzz and flicks from {{cate}} Section</h1>
-{{card()}}
+<h1 id='snews'>Buzz from {{cate|title}} Section</h1>
+{{card(cate)}}
+<div id="page">
+    <button style="padding: 10px; background-color:rgb(224, 186, 186); margin:10px;" id="loadbut" onclick="loadmore()"><p>Load more...</p></button>
+</div>
 
 {%endif%}
 
+<script>
+    let cat = "{{cate}}"
+    if (cat == "None"){
+        cat ="all"
+    }
+    //console.log(cat)
+    let loadbut = document.getElementById("loadbut")
+    let a = document.createElement("a")
+    a.setAttribute("href", `/?page=2&category=${cat}`)
+    loadbut.appendChild = a;
+    let initial = 1
+    async function loadmore() {
+        //res = await fetch("/mongo?page=2")
+        const res = await fetch(`/?page=${initial}&category=${cat}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }, // Set the content type
+            body: { "name": "lol" } // Convert data to JSON for the body
+        });
+        data = await res.text()
+        //console.log(data)
+        if(data !=="No More news"){
+            let html = data
+        let newsdiv = document.getElementById("news")
+        newsdiv.insertAdjacentHTML("beforeend", html)
+            
+        }else{
+            loadbut.remove()
+        }
+        
+        initial++
+    }
 
+</script>
 {% endblock %}
