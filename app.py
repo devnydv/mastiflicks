@@ -10,9 +10,10 @@ app = Flask(__name__)
 data =json.loads( filehandle())
 #print(data)
 data = data["data"]
-reverseddata = data
-reverseddata.reverse()
-postlen = len(reverseddata)
+#reverseddata = data
+#reverseddata.reverse()
+#postlen = len(reverseddata)
+postlen = len(data)
 
 
 @app.route("/", methods = ["GET", "POST"])
