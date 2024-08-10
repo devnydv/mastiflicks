@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{url_for('static', filename='ico/icon.webp')}}" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JHQHE2VME2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-JHQHE2VME2');
+    </script>
     {%block seo%}
 
     {%endblock%}
@@ -66,7 +75,7 @@
                 navUl.classList.remove('show');
             }
         });
-        
+
 
         // Share functionality
         function addShareEventListeners() {
@@ -98,7 +107,7 @@
         }
 
         // Make cards clickable
-         function makeCardsClickable() {
+        function makeCardsClickable() {
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
                 card.addEventListener('click', function () {
@@ -106,11 +115,11 @@
                     window.location.href = articleUrl;
                 });
             });
-        } 
+        }
 
         // Initialize share functionality and make cards clickable for initial cards
         addShareEventListeners();
-       // makeCardsClickable();
+        // makeCardsClickable();
 
         // Initial check for single card layout
         const initialVisibleCards = document.querySelectorAll('.card[style="display: block"]').length;
