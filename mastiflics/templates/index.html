@@ -214,9 +214,9 @@
         // Default to 'all' if the category parameter is empty or not present
         if (!category) {
             category = 'all';
-            const url = new URL(window.location.href);
-            url.searchParams.set('category', category);
-            window.history.replaceState({}, '', url);
+            //const url = new URL(window.location.href);
+            //url.searchParams.set('category', category);
+            //window.history.replaceState({}, '', url);
         }
 
         document.querySelectorAll('.category-btn').forEach(button => {
