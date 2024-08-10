@@ -1,0 +1,145 @@
+{% set title = dbdata["title"] %}
+{% from "title_macro.html" import replacedtitle %}
+{% set seotitle = replacedtitle(title)| lower%}
+{%extends"base.html" %}
+
+
+
+{%block seo%}
+<!-- <base href="https://www.entertainmentnewsinsider.com/movies/blockbuster-premiere"> -->
+<title>{{title}}</title>
+<meta name="description" content="{{dbdata['desc'][:200]}}">
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{dbdata['desc'][:200]}}" />
+<meta property="og:image" content="{{dbdata['img']}}" />
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage"
+        
+      },
+      "headline": "{{title}} ",
+      "description": "{{dbdata['desc'][:200]}}",
+      "image": "{{dbdata["img"]}}",
+      "author": {
+        "@type": "Website",
+        "name": "Mastiflicks"
+      },
+      "datePublished": "{{dbdata["pubDate"]}}",
+      "url": "https://mastiflicks.site/read?id={{ids| int}}&title={{ seotitle }}"
+
+    }
+</script>
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mastiflicks.site/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{dbdata["cat"]}}",
+        "item": "https://mastiflicks.site/?category={{dbdata["cat"]}}"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{dbdata["title"]}}"
+      }]
+    }
+    </script>
+<link rel="stylesheet" href="{{url_for('static', filename='css/read.css')}}">
+{% endblock %}
+
+
+{%block content%}
+
+
+<main>
+    <article>
+        <div class="article-header">
+            <h1 class="article-title">{{dbdata["title"]}}</h1>
+            <div class="article-meta">
+                <time datetime="{{dbdata['pubDate']}}">{{dbdata["pubDate"]}}</time>
+            </div>
+        </div>
+
+        <img src="{{dbdata['img']}}" alt="Red carpet at the blockbuster movie premiere with stars and paparazzi"
+            class="article-image" width="600" height="400">
+
+        <div class="article-content">
+            <p>{{dbdata["desc"]}}</p>
+
+            <!-- <h2>Star-Studded Affair</h2>
+                <p>The movie Maharaja is gaining huge fame. The story of the movie is quite amazing. At first, it becomes difficult to understand the main concept of the story, but with time, the main theme of the movie gets clearer and becomes more intense. The story is based on a misunderstanding between Selvam (Anurag Kashyap) and Maharaja (Vijay Sethupathi). Yes, The character name of Vijay is Maharaja. </p>
+
+                <p>The way the story of the movie is presented is unique and adds some spice to the movie. Both actors performed great in the movie. The actors have given there best, and that can be felt in those scenes.</p> -->
+        </div>
+
+        <div class="share-buttons">
+            <a
+                href="https://twitter.com/intent/tweet?text={{title}}&url=https://mastiflicks.site/read?id={{ids| int}}&title={{ seotitle }}">
+                <button class="share-button" id="shareTwitter">Share on Twitter</button>
+            </a>
+            <a
+                href="https://www.facebook.com/sharer/sharer.php?u=https://mastiflicks.site/read?id={{ids| int}}&title={{ seotitle }}">
+                <button class="share-button" id="shareFacebook">Share on Facebook</button>
+            </a>
+        </div>
+    </article>
+
+    <!-- New Read More section -->
+    {%if alldata ==[] -%}
+    <a href='/' title='read more' style="font-size:large; font-weight: bolder; text-align:center; margin: 5px 5px;">
+        <p class='catbut'>Click Here to Read More...</p>
+    </a>
+    {%else%}
+    <section class="read-more">
+        <h2>Read More</h2>
+        <div class="read-more-grid">
+            {% for item in alldata[0] %}
+            {% set alltitle = replacedtitle(item["title"])|lower %}
+            <div class="read-more-item">
+                <a href="read?id={{item['id']}}&title={{alltitle}}" title='{{item["title"]}}'>
+                <img src="{{item['img']}}" loading='lazy' alt='{{title}}' width="250" height="150">
+                <div class="read-more-item-content">
+                    <h3>{{item["title"]}}</h3>
+                    <p>{{item["desc"]}}</p>
+                </div>
+            </a>
+            </div>
+
+            {%endfor %}
+
+
+
+            {%- endif%}
+        </div>
+    </section>
+</main>
+
+<!-- <footer>
+        <p>&copy; 2023 Entertainment News Insider. All rights reserved.</p>
+    </footer> -->
+
+<!-- <script>
+    document.getElementById('shareTwitter').addEventListener('click', function () {
+        const text = encodeURIComponent("Blockbuster Movie Premiere Dazzles Hollywood - Read all about it on Entertainment News Insider!");
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+    });
+
+    document.getElementById('shareFacebook').addEventListener('click', function () {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    });
+</script> -->
+
+
+{% endblock %}

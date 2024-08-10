@@ -1,0 +1,399 @@
+{% from "title_macro.html" import replacedtitle %}
+
+
+{% macro card(cat) -%}
+
+<div class="categories">
+    <a href="/"><button class="category-btn" data-category="all">All</button></a>
+    <a href="/?category=Trailer"><button class="category-btn" data-category="Trailer">Trailer</button></a>
+    <a href="/?category=Update"><button class="category-btn" data-category="Update">Update</button></a>
+    <a href="/?category=Song"><button class="category-btn" data-category="Song">Music</button></a>
+    <a href="/?category=Review"><button class="category-btn" data-category="Review">Review</button></a>
+</div>
+<div class="card-grid" id="news">
+    {% for item in dbdata %}
+
+    {% set title = item["title"]| lower %}
+
+
+    <!-- <div class="card" data-category="{{item['cat']}}" data-article-url="/read?id={{item['id']}}&title={{replacedtitle(title)}}"> -->
+    <div class="card" data-category="{{item['cat']}}">
+        <a href="/read?id={{item['id']}}&title={{replacedtitle(title)}}" title='{{replacedtitle(title)}}'>
+            <img src="{{item['img']}}" alt="Red carpet movie premiere with celebrities" width="300" height="200"
+                alt='{{title}}'>
+            <button class="share-btn" data-url="/read?id={{item['id']}}&title={{replacedtitle(title)}}"
+                aria-label="Share">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+                </svg>
+            </button>
+            <div class="card-content">
+                <h2>{{item["title"]}}</h2>
+                <p>{{item["pubDate"]}}</p>
+                <p>{{item["desc"]}}</p>
+            </div>
+        </a>
+
+    </div>
+
+    {% endfor%}
+</div>
+
+{%- endmacro %}
+
+
+
+
+{%extends"base.html" %}
+
+
+
+{%block seo%}
+
+
+<title>One Hub for Your Entertainment Masala | MastiFlick</title>
+<meta name="description"
+    content="Get your daily dose of laughter & entertainment! Reviews, news & more in bite-sized articles. Ditch the endless search, visit mastiflicks for flicks of Masti!">
+<meta name="keywords" content="Entertainment">
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+
+{%block content%}
+
+
+<main>
+
+    {%if cate == None %}
+    <!-- for active button -->
+    
+
+    <h1 id='snews' class="section-title">All tranding MastiFlick over Globe </h1>
+
+    {{card("all")}}
+    <div id="page">
+        <!-- <a href="#" class="load-more" id="loadMoreBtn">Load More</a> -->
+        <button class="load-more" id="loadbut" onclick="loadmore()">
+            <p>Load more...</p>
+        </button>
+    </div>
+    {% else %}
+    
+    <h1 id='snews' class="section-title">Buzz from {{cate|title}} Section</h1>
+    {{card(cate)}}
+    <div id="page">
+        <!-- <a href="#" class="load-more" id="loadMoreBtn">Load More</a> -->
+        <button id="loadbut" class="load-more" onclick="loadmore()">
+            <p>Load more...</p>
+        </button>
+    </div>
+
+    {%endif%}
+
+
+
+
+
+
+
+
+    <!-- <a href="#" class="load-more" id="loadMoreBtn">Load More</a> -->
+    <div class="description-card">
+        <h3>Stay Informed with MastiFlicks News</h3>
+        <p>MastiFlicks is your go-to source for the latest updates in the world of entertainment.
+            From blockbuster movie premieres to chart-topping music releases, Emmy-winning TV shows to celebrity
+            gossip, we've got you covered. Our team brings you exclusive content,
+            behind-the-scenes scoops, and in-depth analysis of the entertainment industry. Whether you're a film
+            buff, a TV addict, a music enthusiast, or a celebrity watcher, Entertainment News Insider is your
+            one-stop destination for all things showbiz. Stay ahead of the curve and be the first to know about
+            breaking news, trending topics, and upcoming releases. Join our community of entertainment lovers and
+            never miss a beat in the fast-paced world of glitz and glamour!</p>
+    </div>
+</main>
+<script>
+    let cat = "{{cate}}"
+    if (cat == "None") {
+        cat = "all"
+    }
+    //console.log(cat)
+    let loadbut = document.getElementById("loadbut")
+    let a = document.createElement("a")
+    a.setAttribute("href", `/?page=2&category=${cat}`)
+    loadbut.appendChild = a;
+    let initial = 1
+    async function loadmore() {
+        //res = await fetch("/mongo?page=2")
+        const res = await fetch(`/?page=${initial}&category=${cat}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }, // Set the content type
+            body: { "name": "lol" } // Convert data to JSON for the body
+        });
+        data = await res.text()
+        //console.log(data)
+        if (data !== "No More news") {
+            let html = data
+            let newsdiv = document.getElementById("news")
+            newsdiv.insertAdjacentHTML("beforeend", html)
+
+        } else {
+            loadbut.remove()
+        }
+
+        initial++
+    }
+
+</script>
+<script>
+    function crt() {
+        let newsDiv = document.getElementById("news")
+        let adDiv = document.createElement("div")
+        adDiv.setAttribute("id", "ad")
+        adDiv.setAttribute("class", "kid1")
+        newsDiv.insertAdjacentElement("afterbegin", adDiv)
+
+    }
+
+    function iterateWithRestart(arr, func, delay) {
+
+        let i = 0;
+        const intervalId = setInterval(() => {
+
+            func(arr[i]);
+            i++;
+            if (i === arr.length) {
+                i = 0;
+            }
+        }, delay);
+    }
+
+    // Example usage
+    //const myArray = ['a', 'b', 'c'];
+    function processElement(element) {
+        let adurl = document.getElementById("ad")
+        adurl.innerHTML = `
+           <div class="card">
+            <a href="${element.url}" title='${element.title}' id="adurl" target="_blank">
+                <img src='${element.img}' alt='advertisement'>
+                <div class="card-content">
+                    <h2 class='head' id="adtitle">${element.title}</h2>
+                    
+                    <p class='para'>Ad</p>
+                    
+                    <p class='para'>${element.desc}</p>
+                </div>
+            </a>
+         </div>
+        `
+    }
+
+
+    (async () => {
+        try {
+            let res = await fetch("https://filmyapp-e1005.firebaseio.com/mastiflix/adv.json")
+            let addata = await res.json()
+            setTimeout(crt, 4500);
+            iterateWithRestart(addata, processElement, 5000);
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error fetching da:', error);
+            //let adelement = document.getElementById("ad")
+            //adelement.parentNode.removeChild(adelement);
+        }
+    })();
+
+</script>
+<script>
+    // Function to set the active button based on the URL parameter
+    function setActiveButton() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let category = urlParams.get('category');
+
+        // Default to 'all' if the category parameter is empty or not present
+        if (!category) {
+            category = 'all';
+            const url = new URL(window.location.href);
+            url.searchParams.set('category', category);
+            window.history.replaceState({}, '', url);
+        }
+
+        document.querySelectorAll('.category-btn').forEach(button => {
+            if (button.getAttribute('data-category') === category) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+    }
+
+    // Call the function on page load
+    window.addEventListener('load', setActiveButton);
+</script>
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('nav ul');
+
+        menuToggle.addEventListener('click', function () {
+            navUl.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (event) {
+            const isClickInsideNav = nav.contains(event.target);
+            if (!isClickInsideNav && navUl.classList.contains('show')) {
+                navUl.classList.remove('show');
+            }
+        });
+
+        // Close menu when window is resized to larger screen
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768 && navUl.classList.contains('show')) {
+                navUl.classList.remove('show');
+            }
+        });
+
+        // Category filtering
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const cards = document.querySelectorAll('.card');
+        const cardGrid = document.querySelector('.card-grid');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const category = btn.dataset.category;
+
+                let visibleCards = 0;
+                cards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                        visibleCards++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Adjust grid layout for single card
+                if (visibleCards === 1) {
+                    cardGrid.style.justifyContent = 'center';
+                } else {
+                    cardGrid.style.justifyContent = 'start';
+                }
+            });
+        });
+
+        // Load More functionality
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        let currentPage = 1;
+
+        loadMoreBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            currentPage++;
+            fetch(`https://www.entertainmentnewsinsider.com/api/news?page=${currentPage}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.dataset.category = item.category;
+                        card.dataset.articleUrl = item.link;
+                        card.innerHTML = `
+                            <img src="${item.image}" alt="${item.imageAlt}" width="300" height="200">
+                            <button class="share-btn" data-url="${item.link}" aria-label="Share">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                                </svg>
+                            </button>
+                            <div class="card-content">
+                                <h2>${item.title}</h2>
+                                <p>${item.excerpt}</p>
+                            </div>
+                        `;
+                        cardGrid.appendChild(card);
+                    });
+
+                    // Re-apply category filtering to new cards
+                    const activeCategory = document.querySelector('.category-btn.active').dataset.category;
+                    if (activeCategory !== 'all') {
+                        cards.forEach(card => {
+                            if (card.dataset.category !== activeCategory) {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    // Add event listeners to new share buttons and make cards clickable
+                    addShareEventListeners();
+                    makeCardsClickable();
+
+                    // Check if we need to adjust the grid layout
+                    const visibleCards = document.querySelectorAll('.card[style="display: block"]').length;
+                    if (visibleCards === 1) {
+                        cardGrid.style.justifyContent = 'center';
+                    } else {
+                        cardGrid.style.justifyContent = 'start';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    loadMoreBtn.textContent = 'No more news to load';
+                    loadMoreBtn.disabled = true;
+                });
+        });
+
+        // Share functionality
+        function addShareEventListeners() {
+            const shareBtns = document.querySelectorAll('.share-btn');
+            shareBtns.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Prevent the card click event from firing
+                    const url = this.dataset.url;
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Check out this news!',
+                            url: url
+                        }).then(() => {
+                            console.log('Thanks for sharing!');
+                        }).catch(console.error);
+                    } else {
+                        // Fallback for browsers that don't support the Web Share API
+                        const tempInput = document.createElement('input');
+                        document.body.appendChild(tempInput);
+                        tempInput.value = url;
+                        tempInput.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tempInput);
+                        alert('Link copied to clipboard!');
+                    }
+                });
+            });
+        }
+
+        // Make cards clickable
+        function makeCardsClickable() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('click', function () {
+                    const articleUrl = this.dataset.articleUrl;
+                    window.location.href = articleUrl;
+                });
+            });
+        }
+
+        // Initialize share functionality and make cards clickable for initial cards
+        addShareEventListeners();
+        makeCardsClickable();
+
+        // Initial check for single card layout
+        const initialVisibleCards = document.querySelectorAll('.card[style="display: block"]').length;
+        if (initialVisibleCards === 1) {
+            cardGrid.style.justifyContent = 'center';
+        }
+    });
+</script> -->
+
+{% endblock %}

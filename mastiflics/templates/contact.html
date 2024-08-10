@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- <base href="https://www.entertainmentnewsinsider.com/contact"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Entertainment News Insider</title>
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+
+<body>
+    <header>
+        <h1>Entertainment News Insider</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="https://www.entertainmentnewsinsider.com/">Home</a></li>
+            <li><a href="https://www.entertainmentnewsinsider.com/privacy-policy">Privacy Policy</a></li>
+            <li><a href="https://www.entertainmentnewsinsider.com/contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Whether you have a question about our content, want to provide feedback, or are
+            interested in collaborating, please don't hesitate to reach out.</p>
+
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+
+        <div class="contact-info">
+            <h3>Other Ways to Reach Us</h3>
+            <p>Email: contact@entertainmentnewsinsider.com</p>
+            <p>Phone: (555) 123-4567</p>
+            <p>Address: 123 Entertainment Blvd, Hollywood, CA 90028</p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Entertainment News Insider. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Here you would typically send the form data to a server
+            // For this example, we'll just show an alert
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
