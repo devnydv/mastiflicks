@@ -7,7 +7,8 @@
 
 {%block seo%}
 <!-- <base href="https://www.entertainmentnewsinsider.com/movies/blockbuster-premiere"> -->
-<title>{{title}}</title>
+
+<title>{{title[:110]}}...</title>
 <meta name="description" content="{{dbdata['desc'][:150]}}...">
 <meta property="og:title" content="{{title}}" />
 <meta property="og:description" content="{{dbdata['desc'][:150]}}..." />
