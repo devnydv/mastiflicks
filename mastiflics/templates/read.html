@@ -8,9 +8,9 @@
 {%block seo%}
 <!-- <base href="https://www.entertainmentnewsinsider.com/movies/blockbuster-premiere"> -->
 <title>{{title}}</title>
-<meta name="description" content="{{dbdata['desc'][:200]}}">
+<meta name="description" content="{{dbdata['desc'][:150]}}...">
 <meta property="og:title" content="{{title}}" />
-<meta property="og:description" content="{{dbdata['desc'][:200]}}" />
+<meta property="og:description" content="{{dbdata['desc'][:150]}}..." />
 <meta property="og:image" content="{{dbdata['img']}}" />
 
 <script type="application/ld+json">
@@ -22,7 +22,7 @@
         
       },
       "headline": "{{title}} ",
-      "description": "{{dbdata['desc'][:200]}}",
+      "description": "{{dbdata['desc'][:150]}}...",
       "image": "{{dbdata["img"]}}",
       "author": {
         "@type": "Website",
