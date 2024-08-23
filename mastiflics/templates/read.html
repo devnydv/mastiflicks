@@ -24,12 +24,18 @@
       },
       "headline": "{{title}} ",
       "description": "{{dbdata['desc'][:150]}}...",
-      "image": "{{dbdata["img"]}}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{dbdata['img']}}",
+        "width": 800,
+        "height": 600,
+        "caption": "A freshly baked pizza with pepperoni and cheese."
+  },
       "author": {
         "@type": "Website",
         "name": "Mastiflicks"
       },
-      "datePublished": "{{dbdata["pubDate"]}}",
+      "datePublished": "{{dbdata['pubDate']}}",
       "url": "https://mastiflicks.site/read?id={{ids| int}}&title={{ seotitle }}"
 
     }
@@ -108,12 +114,12 @@
             {% set alltitle = replacedtitle(item["title"])|lower %}
             <div class="read-more-item">
                 <a href="read?id={{item['id']}}&title={{alltitle}}" title='{{item["title"]}}'>
-                <img src="{{item['img']}}" loading='lazy' alt='{{title}}' width="250" height="150">
-                <div class="read-more-item-content">
-                    <h3>{{item["title"]}}</h3>
-                    <p>{{item["desc"]}}</p>
-                </div>
-            </a>
+                    <img src="{{item['img']}}" loading='lazy' alt='{{title}}' width="250" height="150">
+                    <div class="read-more-item-content">
+                        <h3>{{item["title"]}}</h3>
+                        <p>{{item["desc"]}}</p>
+                    </div>
+                </a>
             </div>
 
             {%endfor %}
