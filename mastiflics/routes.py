@@ -53,7 +53,9 @@ def read():
     if int(id) > 11:
         newid = int(id) 
         data = catedata(0, "all")
-        otherpost.append(data)
+        filtered_items = [item for item in data if item['id'] != id]
+        otherpost.append(filtered_items)
+        
     else:
         otherpost = []
 
