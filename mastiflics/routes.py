@@ -2,7 +2,7 @@ from bson import json_util
 import math
 import datetime
 from mastiflics.db import catedata, catsize, readone, oneid, update, submit
-from flask import render_template, request
+from flask import render_template, request , send_from_directory
 from mastiflics import app
 
 @app.route("/", methods = ["GET", "POST"])
@@ -100,3 +100,7 @@ def newdb():
 @app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
+
+@app.route('/robots.txt')
+def robots_txt():
+    return send_from_directory(app.root_path, 'robots.txt')
