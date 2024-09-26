@@ -3,11 +3,21 @@
 {% macro card(cat) -%}
 
 <div class="categories">
-    <a href="/"><button class="category-btn" data-category="all">All</button></a>
-    <a href="/?category=Trailer"><button class="category-btn" data-category="Trailer">Trailer</button></a>
-    <a href="/?category=Update"><button class="category-btn" data-category="Update">Update</button></a>
-    <a href="/?category=Song"><button class="category-btn" data-category="Song">Music</button></a>
-    <a href="/?category=Review"><button class="category-btn" data-category="Review">Review</button></a>
+    <a href="/" title="All news">
+        <button class="category-btn" data-category="all" >All</button>
+    </a>
+    <a href="/?category=Trailer" title="Trailer news">
+        <button class="category-btn" data-category="Trailer">Trailer</button>
+    </a>
+    <a href="/?category=Update" title="Update news">
+        <button class="category-btn" data-category="Update">Update</button>
+    </a>
+    <a href="/?category=Song" title="Song news">
+        <button class="category-btn" data-category="Song">Music</button>
+    </a>
+    <a href="/?category=Review" title="Review">
+        <button class="category-btn" data-category="Review">Review</button>
+    </a>
 </div>
 <div class="card-grid" id="news">
     {% for item in dbdata %}
