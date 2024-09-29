@@ -14,32 +14,7 @@
 <meta property="og:description" content="{{dbdata['desc'][:150]}}..." />
 <meta property="og:image" content="{{dbdata['img']}}" />
 
-<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage"
-        
-      },
-      "headline": "{{title}} ",
-      "description": "{{dbdata['desc'][:150]}}...",
-      "image": {
-        "@type": "ImageObject",
-        "url": "{{dbdata['img']}}",
-        "width": 460,
-        "height": 240,
-        "caption": "{{title}}"
-  },
-      "author": {
-        "@type": "Website",
-        "name": "Mastiflicks"
-      },
-      "datePublished": "{{dbdata['pubDate']}}",
-      "url": "https://mastiflicks.site/read?id={{ids| int}}&title={{ seotitle }}"
 
-    }
-</script>
 <script type="application/ld+json">
     {
       "@context": "https://schema.org",
