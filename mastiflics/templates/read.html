@@ -1,4 +1,6 @@
 {% set title = dbdata["title"] %}
+{%set img = dbdata['img']%}
+{%set sizedimg = img.replace("240", "360").replace("460", "640")%}
 {% from "title_macro.html" import replacedtitle %}
 {% set seotitle = replacedtitle(title)| lower%}
 {%extends"base.html" %}
@@ -52,7 +54,7 @@
             </div>
         </div>
 
-        <img src="{{dbdata['img']}}" alt="Red carpet at the blockbuster movie premiere with stars and paparazzi"
+        <img src="{{sizedimg}}" alt="Red carpet at the blockbuster movie premiere with stars and paparazzi"
             class="article-image" width="600" height="400">
 
         <div class="article-content">
