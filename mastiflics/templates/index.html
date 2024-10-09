@@ -28,8 +28,8 @@
     <!-- <div class="card" data-category="{{item['cat']}}" data-article-url="/read?id={{item['id']}}&title={{replacedtitle(title)}}"> -->
     <div class="card" data-category="{{item['cat']}}">
         <a href="/read?id={{item['id']}}&title={{replacedtitle(title)}}" title='{{replacedtitle(title)}}'>
-            <img src="{{item['img']}}" alt="Red carpet movie premiere with celebrities" width="300" height="200"
-                alt='{{title}}'>
+            <img src="{{item['img']}}" width="300" height="200"
+                alt=' Img for {{title[:55]}}...'>
             <button class="share-btn" data-url="/read?id={{item['id']}}&title={{replacedtitle(title)}}"
                 aria-label="Share">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -39,7 +39,7 @@
             </button>
             <div class="card-content">
                 <h2>{{item["title"]}}</h2>
-                <p>{{item["pubDate"]}}</p>
+                <p>{{item["pubDate"] | format_date}}</p>
                 <p>{{item["desc"]}}</p>
             </div>
         </a>

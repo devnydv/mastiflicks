@@ -4,6 +4,8 @@ import datetime
 from mastiflics.db import catedata, catsize, readone, oneid, update, submit
 from flask import render_template, request , send_from_directory
 from mastiflics import app
+from datetime import datetime
+
 
 @app.route("/", methods = ["GET", "POST"])
 def formongo():
@@ -104,3 +106,17 @@ def privacy():
 @app.route('/robots.txt')
 def robots_txt():
     return send_from_directory(app.root_path, 'robots.txt')
+
+
+
+
+# Custom Jinja filter to format the date
+@app.template_filter('format_date')
+def format_date(value):
+    try:
+        # Convert the string to a datetime object
+        date_obj = datetime.strptime(value, '%A, %d %b, %Y')
+        # Format it to 'YYYY-MM-DD'
+        return date_obj.strftime('%Y-%m-%d')
+    except ValueError:
+        return value

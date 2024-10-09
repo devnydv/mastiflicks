@@ -38,6 +38,22 @@
       }]
     }
     </script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "headline": "{{title}}",
+          "image": [
+            "{{dbdata['img']}}"
+           ],
+          "datePublished": "{{dbdata['pubDate'] | format_date}}",
+          "author": [{
+              "@type": "Person",
+              "name": "Mastiflicks",
+              "url": "https://www.mastiflicks.site"
+            }]
+        }
+        </script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/read.css')}}">
 {% endblock %}
 
