@@ -71,7 +71,7 @@ def newdb():
         for x in lastid:
             idlast = int(x["id"]) +1
         
-        timer = datetime.datetime.now()
+        timer = datetime.now()
         timedata = f'{timer.strftime("%A")}, {timer.day} {timer.strftime("%b")}, {timer.strftime("%Y")}'
         return render_template("db.html", tm = timedata, lid= idlast)
     
